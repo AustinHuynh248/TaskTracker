@@ -25,21 +25,21 @@ function App() {
 
   // Fetch Task
   const fetchTasks = async () => {
-    const res = await fetch("http://localhost:3000/tasks");
+    const res = await fetch("https://tasklist-tracker.netlify.app/tasks");
     const data = await res.json();
     return data;
   };
 
   // Fetch Task Singlar to fetch the data from json
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:3000/tasks/${id}`);
+    const res = await fetch(`https://tasklist-tracker.netlify.app/tasks/${id}`);
     const data = await res.json();
     return data;
   };
 
   // Add Task
   const addTask = async (task) => {
-    const res = await fetch("http://localhost:3000/tasks", {
+    const res = await fetch("https://tasklist-tracker.netlify.app/tasks", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -57,7 +57,9 @@ function App() {
 
   // Delete a task
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:3000/tasks/${id}`, { method: "Delete" });
+    await fetch(`https://tasklist-tracker.netlify.app/tasks/${id}`, {
+      method: "Delete",
+    });
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
@@ -67,13 +69,16 @@ function App() {
     const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
 
     console.log(updatedTask);
-    const res = await fetch(`http://localhost:3000/tasks/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(updatedTask),
-    });
+    const res = await fetch(
+      `https://tasklist-tracker.netlify.app/tasks/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(updatedTask),
+      }
+    );
 
     const data = await res.json();
 
